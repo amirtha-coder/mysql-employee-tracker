@@ -9,49 +9,41 @@ const questions = [
         name: "View all departments",
         value: "allDepartments",
         short: "allDepartments",
-        loop: true,
       },
       {
         name: "View all roles",
         value: "allRoles",
         short: "allRoles",
-        loop: true,
       },
       {
         name: "View all employees",
         value: "allEmployees",
         short: "allEmployees",
-        loop: true,
       },
       {
         name: "Add a department",
         value: "addDepartment",
         short: "addDepartment",
-        loop: true,
       },
       {
         name: "Add a role",
         value: "addRole",
         short: "addRole",
-        loop: true,
       },
       {
         name: "Add an employee",
         value: "addEmployee",
         short: "addEmployee",
-        loop: true,
       },
       {
         name: "Update an employee role",
         value: "updateRole",
         short: "updateRole",
-        loop: true,
       },
       {
-        name: "Quit",
+        name: "quit",
         value: "quit",
         short: "quit",
-        loop: false,
       },
     ],
     name: "options",
@@ -120,16 +112,17 @@ const questions = [
     },
   },
 ];
-const init = () => {
+const init = async () => {
   let inProgress = true;
 
   while (inProgress) {
-    const answers = inquirer.prompt(questions);
+    const answers = await inquirer.prompt(questions);
 
     if (answers.options === "quit") {
       inProgress = false;
-      console.table(answers);
+      console.log(answers);
     }
   }
 };
+
 init();
