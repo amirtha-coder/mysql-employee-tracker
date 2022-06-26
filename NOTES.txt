@@ -1,0 +1,81 @@
+User Journeys:
+
+- Please select an option:
+  - view all departments
+  - view all roles
+  - view all employees
+  - add a department
+  - add a role
+  - add an employee
+  - update an employee role
+  - quit
+
+View Actions
+============
+
+Department
+- id
+- name
+
+Role
+- id
+- title
+- salary
+- department name
+
+Employee
+- id
+- firstName
+- lastName
+- role title
+- salary
+- department name
+- manager full name
+
+Add Actions
+===========
+
+Department
+- Please enter department name:
+  (take answer and store in DB)
+
+Role
+Get all departments from DB and construct department choices
+- Please enter role title:
+- Please enter role salary:
+- Please select the department the role belongs to:
+  - Department 1
+  - Department 2
+  - Department 3
+(take answers and store in DB)
+
+Employee
+Get all roles from DB and construct role choices
+Get all employees from DB and construct employee choices
+- Please enter first name:
+- Please enter last name:
+- Please select the role the employee belongs to:
+  - Role 1
+  - Role 2
+  - Role 3
+- Please select the employee's manager:
+  - Employee 1
+  - Employee 2
+  - Employee 3
+(take answers and store in DB)
+
+Update Actions
+==============
+Get all employees from DB and construct employee choices
+Get all roles from DB and construct roles choices
+- Please select the employee you want to update:
+  - Employee 1
+  - Employee 2
+  - Employee 3
+- Please select the role you want to update for the employee:
+  - Role 1
+  - Role 2
+  - Role 3
+(take answers and store in DB)
+
+Once any action expect quit is performed loop back to start
