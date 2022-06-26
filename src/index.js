@@ -1,4 +1,6 @@
 // global declarations || imports
+require("dotenv").config();
+const initDatabase = require("./db");
 const inquirer = require("inquirer");
 const questions = [
   {
@@ -113,6 +115,12 @@ const questions = [
   },
 ];
 const init = async () => {
+  const { executeQuery, closeConnection } = await initDatabase({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+  });
   let inProgress = true;
 
   while (inProgress) {
