@@ -14,8 +14,8 @@ CREATE TABLE role (
   title VARCHAR(255) NOT NULL,
   salary DECIMAL(8,2)NOT NULL,
   departmentId INT NOT NULL,
-  FOREIGN KEY(departmentId) REFERENCES department(id),
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  FOREIGN KEY (departmentId) REFERENCES department (id) ON DELETE CASCADE
 );
 
 CREATE TABLE employee (
@@ -23,10 +23,9 @@ CREATE TABLE employee (
   firstName VARCHAR(30) NOT NULL,
   lastName VARCHAR(30) NOT NULL,
   roleId INT NOT NULL,
-  managerId INT NOT NULL, 
+  managerId INT, 
   FOREIGN KEY (roleId) REFERENCES role(id),
   PRIMARY KEY (id),
-  INDEX manager_index(managerId),
-  CONSTRAINT Fk_manager FOREIGN KEY (managerId)
-  REFERENCES employee(id)
+  FOREIGN KEY (managerId)
+  REFERENCES employee(id) ON DELETE SET NULL
 );

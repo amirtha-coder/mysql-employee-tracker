@@ -1,7 +1,12 @@
 // global declarations || imports
 require("dotenv").config();
-const initDatabase = require("./db");
+const initDatabase = require("./connection");
 const inquirer = require("inquirer");
+const {
+  getDepartmentsfromDB,
+  getRolesfromDB,
+  getEmployeesforDB,
+} = require("./view");
 const questions = [
   {
     type: "list",
@@ -121,10 +126,30 @@ const init = async () => {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
   });
+
   let inProgress = true;
 
   while (inProgress) {
     const answers = await inquirer.prompt(questions);
+
+    if (answers.options === "allDepartments") {
+      await getDepartmentsfromDB(executeQuery);
+    }
+    if (answers.options === "allRoles") {
+      getRolesfromDB();
+    }
+    if (answers.options === "allEmployees") {
+      getEmployeesforDB();
+    }
+    if (answers.options === "addDepartment") {
+    }
+    if (answers.options === "addRole") {
+    }
+
+    if (answers.options === "addEmployee") {
+    }
+    if (answers.options === "updateRole") {
+    }
 
     if (answers.options === "quit") {
       inProgress = false;

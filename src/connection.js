@@ -10,8 +10,6 @@ const initDatabase = async (config) => {
       return results;
     }
 
-    // checking if terminal works
-
     const [results] = await db.query(query);
 
     return results;
