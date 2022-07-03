@@ -8,12 +8,11 @@ const chooseDepartment = async () => {
     database: process.env.DB_NAME,
   });
   const dept = await executeQuery("SELECT * FROM department");
-
+  console.log(dept);
   return dept.map((department) => {
     return {
       name: department.departmentName,
-      value: department.departmentId,
-      short: department.departmentName,
+      value: department.id,
     };
   });
 };
@@ -26,10 +25,10 @@ const chooseRole = async () => {
   });
   const getRole = await executeQuery("SELECT * FROM role");
 
-  return getRole.map((getRole) => {
+  return getRole.map((role) => {
     return {
-      name: getRole.title,
-      value: getRole.departmentId,
+      name: role.title,
+      value: role.id,
     };
   });
 };
@@ -42,10 +41,10 @@ const chooseEmployee = async () => {
     database: process.env.DB_NAME,
   });
   const getEmployee = await executeQuery("SELECT * FROM employee");
-  return getEmployee.map((getEmployee) => {
+  return getEmployee.map((manager) => {
     return {
-      name: getEmployee.title,
-      value: getEmployee.departmentId,
+      name: `${manager.firstName} ${manager.lastName} `,
+      value: manager.id,
     };
   });
 };
