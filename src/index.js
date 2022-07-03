@@ -27,7 +27,7 @@ const init = async () => {
     database: process.env.DB_NAME,
   });
   const dept = await executeQuery("SELECT * FROM department");
-  console.log(await chooseDepartment(dept));
+
   const getRole = await executeQuery("SELECT * FROM role");
   const getEmployee = await executeQuery("SELECT * FROM employee");
 
@@ -180,7 +180,6 @@ const init = async () => {
 
   while (inProgress) {
     const answers = await inquirer.prompt(questions);
-    console.log(answers);
 
     if (answers.options === "allDepartments") {
       await getDepartmentsfromDB(executeQuery);
@@ -209,7 +208,7 @@ const init = async () => {
 
     if (answers.options === "quit") {
       inProgress = false;
-      console.log(answers);
+
       await closeConnection();
     }
   }

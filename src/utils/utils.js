@@ -8,7 +8,7 @@ const chooseDepartment = async () => {
     database: process.env.DB_NAME,
   });
   const dept = await executeQuery("SELECT * FROM department");
-  console.log(dept);
+
   return dept.map((department) => {
     return {
       name: department.departmentName,
