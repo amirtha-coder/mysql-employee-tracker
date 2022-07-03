@@ -53,6 +53,19 @@ cd mysql-employee-tracker
 npm i
 ```
 
+### Database Setup
+
+Open an integrated terminal from src directory. Then run:
+
+```
+
+mysql -u root -p
+
+source schema.sql
+
+source seed.sql
+```
+
 <br>
 
 ## Usage
