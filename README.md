@@ -5,9 +5,10 @@ An employee tracker application that use mySQL, inquirer and Node.JS and more pa
 
 ## Contents Table
 
-- [User Journey](#User-Journey)
+- [User Journey](#user-journey)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Technologies/ Packages](#technologies-used)
 - [License](#license)
 - [Questions](#questions)
 
@@ -75,6 +76,17 @@ Please follow the instructions below:
 ```
 npm run start
 ```
+
+<br>
+
+## Technologies used
+
+- Node
+- dotenv
+- mysql2
+- inquirer
+- express
+- console.table
 
 <br>
 
