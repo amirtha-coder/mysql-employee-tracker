@@ -5,8 +5,18 @@ const getDepartmentsfromDB = async (executeQuery) => {
   console.table(department);
 };
 
-const getRolesfromDB = async (db) => {};
+const getRolesfromDB = async (executeQuery) => {
+  const employee = await executeQuery("SELECT * FROM role");
+  console.table(employee);
+};
 
-const getEmployeesforDB = async (db) => {};
+const getEmployeesforDB = async (executeQuery) => {
+  const employee = await executeQuery("SELECT * FROM employee");
+  console.table(employee);
+};
 
-module.exports = { getDepartmentsfromDB, getRolesfromDB, getEmployeesforDB };
+module.exports = {
+  getDepartmentsfromDB,
+  getRolesfromDB,
+  getEmployeesforDB,
+};
