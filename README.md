@@ -16,7 +16,7 @@ An employee tracker application that use mySQL, inquirer and Node.JS and more pa
 
 # Demonstration Video
 
-Please click [here](https://www.loom.com/share/8258b1d6b0024506accf2bf6faae3a99) to view.
+Please click [here](https://www.loom.com/share/4018597c14824c30aba257f6596c8dff) to view.
 
 <br>
 
