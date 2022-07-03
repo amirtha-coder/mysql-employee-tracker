@@ -6,13 +6,18 @@ const {
   getDepartmentsfromDB,
   getRolesfromDB,
   getEmployeesforDB,
-} = require("./view");
+} = require("./utils/view");
 const {
   addDepartmentToDB,
   addRoleToDB,
   addEmployeeToDB,
   updatedEmployeeRoleToDB,
-} = require("./edit");
+} = require("./utils/edit");
+const {
+  chooseDepartment,
+  chooseEmployee,
+  chooseRole,
+} = require("./utils/utils");
 
 const init = async () => {
   const { executeQuery, closeConnection } = await initDatabase({
@@ -24,32 +29,6 @@ const init = async () => {
   const dept = await executeQuery("SELECT * FROM department");
   const getRole = await executeQuery("SELECT * FROM role");
   const getEmployee = await executeQuery("SELECT * FROM employee");
-  const chooseDepartment = () => {
-    return dept.map((department) => {
-      return {
-        name: department.departmentName,
-        value: department.departmentId,
-        short: department.departmentName,
-      };
-    });
-  };
-  const chooseRole = () => {
-    return getRole.map((role) => {
-      return {
-        name: getRole.title,
-        value: getRole.departmentId,
-      };
-    });
-  };
-
-  const chooseEmployee = () => {
-    return getEmployee.map((manager) => {
-      return {
-        name: getRole.title,
-        value: getRole.departmentId,
-      };
-    });
-  };
 
   const questions = [
     {
@@ -88,8 +67,8 @@ const init = async () => {
         },
         {
           name: "Update an employee role",
-          value: "updateRole",
-          short: "updateRole",
+          value: "updateEmployeeRole",
+          short: "updateEmployeeRole",
         },
         {
           name: "quit",
@@ -130,7 +109,7 @@ const init = async () => {
       type: "list",
       message: "Please choose the department?",
       name: "roleDepartment",
-      choices: chooseDepartment(dept),
+      choices: await chooseDepartment(dept),
       when: (answers) => answers.options === "addRole",
       validate: (answer) => {
         return answer ? true : "Please enter the department to continue";
@@ -158,7 +137,7 @@ const init = async () => {
       type: "list",
       message: "Please enter your employee's role :",
       name: "employeeRole",
-      choices: chooseRole(getRole),
+      choices: await chooseRole(getRole),
       when: (answers) => answers.options === "addEmployee",
       validate: (answer) => {
         return answer ? true : "Please enter the role to continue";
@@ -168,10 +147,30 @@ const init = async () => {
       type: "list",
       message: "Please enter youe employee's manager:",
       name: "manager",
-      choices: chooseEmployee(getEmployee),
+      choices: await chooseEmployee(getEmployee),
       when: (answers) => answers.options === "addEmployee",
       validate: (answer) => {
         return answer ? true : "Please enter the maanager to continue";
+      },
+    },
+    {
+      type: "list",
+      message: "Please enter youe employee's role",
+      name: "updateRole",
+      choices: await chooseRole(getRole),
+      when: (answers) => answers.options === "updateEmployeeRole",
+      validate: (answer) => {
+        return answer ? true : "Please enter the role to continue";
+      },
+    },
+    {
+      type: "list",
+      message: "Please enter youe employee's manager",
+      name: "id",
+      choices: await chooseEmployee(getEmployee),
+      when: (answers) => answers.options === "updateEmployeeRole",
+      validate: (answer) => {
+        return answer ? true : "Please enter the manager to continue";
       },
     },
   ];
@@ -197,23 +196,14 @@ const init = async () => {
     }
 
     if (answers.options === "addRole") {
-      // await addRoleToDB(executeQuery, answers);
+      await addRoleToDB(executeQuery, answers);
     }
-    // dept.map((each) => {
-    //   console.log(each[1]);
-    //   // const desiredDeptChoices = {
-    //   //   name: each.val(),
-    //   //   value: each.val(),
-    //   //   short: each.val(),
-    //   // };
-    //   // departmentChoices.push(desiredDeptChoices);
-    // });
     if (answers.options === "addEmployee") {
-      addEmployeeToDB();
+      await addEmployeeToDB(executeQuery, answers);
     }
     if (answers.options === "updateRole") {
+      await updatedEmployeeRoleToDB(executeQuery, answers);
     }
-    updatedEmployeeRoleToDB();
 
     if (answers.options === "quit") {
       inProgress = false;
