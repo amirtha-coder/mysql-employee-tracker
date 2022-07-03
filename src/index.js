@@ -210,6 +210,7 @@ const init = async () => {
       inProgress = false;
 
       await closeConnection();
+      process.exit();
     }
   }
 };
